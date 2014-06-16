@@ -5,12 +5,18 @@ var filter = new BlueGel(new Leap.Controller({enableGestures: true}));
 
 var enabledApplications = ['iTunes', 'Rdio', 'Spotify'];
 
-var application, minDuration;
-process.argv.forEach(function(arg){
-	var i = enabledApplications.indexOf(arg)
-	if(i >= 0) application = enabledApplications[i];
+// Default values
+var application = 'iTunes',
+	minDuration = 500;
+
+for(var i=0; i<process.argv.length; i++)
+	var arg = process.argv[i];
+	var index = enabledApplications.indexOf(arg);
+	if(index >= 0) application = enabledApplications[i];
+
+	if( i+1 < process.argv.length && (arg == "--activation" || arg == "--minDuration"))
+		minDuration = parseInt( process.argv[i+1] );
 });
-// If none match, the filters have built-in defaults
 
 // import and set up our three filter types
 var filterTypes = [
@@ -26,7 +32,7 @@ for (var i = 0; i < filterTypes.length; i++) {
   filter.on(action.filterType, action.filterParameters, activationFilter.filter(action));
 }
 
-filter.on("hold", {state: "start", minDuration: 500}, function(gesture) {
+filter.on("hold", {state: "start", minDuration: minDuration}, function(gesture) {
   // the update event will be fired once the hold reaches the minimum duration
   console.log("Activating control!");
   activationFilter.activate();
