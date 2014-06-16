@@ -6,7 +6,7 @@ var filter = new BlueGel(new Leap.Controller({enableGestures: true}));
 var enabledApplications = ['iTunes', 'Rdio', 'Spotify'];
 
 // Default values
-var application = 'iTunes',
+var application = 'Rdio',
 	minDuration = 500;
 
 for(var i=0; i<process.argv.length; i++)
