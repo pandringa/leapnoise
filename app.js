@@ -9,14 +9,14 @@ var enabledApplications = ['iTunes', 'Rdio', 'Spotify'];
 var application = 'Rdio',
 	minDuration = 500;
 
-for(var i=0; i<process.argv.length; i++)
+for(var i=0; i<process.argv.length; i++){
 	var arg = process.argv[i];
 	var index = enabledApplications.indexOf(arg);
 	if(index >= 0) application = enabledApplications[i];
 
 	if( i+1 < process.argv.length && (arg == "--activation" || arg == "--minDuration"))
 		minDuration = parseInt( process.argv[i+1] );
-});
+};
 
 // import and set up our three filter types
 var filterTypes = [
