@@ -7,21 +7,21 @@ var enabledApplications = ['iTunes', 'Rdio', 'Spotify'];
 
 // Default values
 var application = 'Rdio',
-	minDuration = 500;
+	minDuration = 300;
 
 for(var i=0; i<process.argv.length; i++){
 	var arg = process.argv[i];
 	var index = enabledApplications.indexOf(arg);
 	if(index >= 0) application = enabledApplications[i];
 
-	if( i+1 < process.argv.length && (arg == "--activation" || arg == "--minDuration"))
+	if( i+1 < process.argv.length && (arg == "-activation" || arg == "-minDuration"))
 		minDuration = parseInt( process.argv[i+1] );
 };
 
 // import and set up our three filter types
 var filterTypes = [
   require("./lib/playpause_filter.js")(application),
-  require("./lib/volume_filter.js")(application),
+  //require("./lib/volume_filter.js")(application),
   require("./lib/track_filter.js")(application)
 ];
 
